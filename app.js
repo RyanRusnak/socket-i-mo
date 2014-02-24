@@ -16,41 +16,41 @@ var handler = function(req, res) {
 // });
 
 // //Post heroku mongoose stuff
-// var http = require ('http');             // For serving a basic web page.
-// var mongoose = require ("mongoose"); // The reason for this demo.
+var http = require ('http');             // For serving a basic web page.
+var mongoose = require ("mongoose"); // The reason for this demo.
 
-// // Here we find an appropriate database to connect to, defaulting to
-// // localhost if we don't find one.
-// var uristring =
-// process.env.MONGOLAB_URI ||
-// process.env.MONGOHQ_URL ||
-// 'mongodb://localhost/test';
+// Here we find an appropriate database to connect to, defaulting to
+// localhost if we don't find one.
+var uristring =
+process.env.MONGOLAB_URI ||
+process.env.MONGOHQ_URL ||
+'mongodb://localhost/socketgame';
 
-// // The http server will listen to an appropriate port, or default to
-// // port 5000.
-// var theport = process.env.PORT || 5000;
+// The http server will listen to an appropriate port, or default to
+// port 5000.
+var theport = process.env.PORT || 3000;
 
-// // Makes connection asynchronously.  Mongoose will queue up database
-// // operations and release them when the connection is complete.
-// mongoose.connect(uristring, function (err, res) {
-//   if (err) {
-//   console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-//   } else {
-//   console.log ('Succeeded connected to: ' + uristring);
-//   }
-// });
+// Makes connection asynchronously.  Mongoose will queue up database
+// operations and release them when the connection is complete.
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+  console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 
-// var userSchema = mongoose.Schema({
-//     name: String
-// });
+var userSchema = mongoose.Schema({
+    name: String
+});
 
-// var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
 
-// User.find(function (err, users) {
-//   if (err) return console.error(err);
-//   console.log('users!!!!!');
-//   console.log(users.length);
-// });
+User.find(function (err, users) {
+  if (err) return console.error(err);
+  console.log('users!!!!!');
+  console.log(users.length);
+});
 
 
 var app = require('http').createServer(handler);
