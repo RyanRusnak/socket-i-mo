@@ -24,7 +24,7 @@ var mongoose = require ("mongoose"); // The reason for this demo.
 var uristring =
 process.env.MONGOLAB_URI ||
 process.env.MONGOHQ_URL ||
-'mongodb://localhost/socketgame';
+'mongodb://localhost/heroku_app22500191';
 
 // The http server will listen to an appropriate port, or default to
 // port 5000.
@@ -102,11 +102,11 @@ io.sockets.on('connection', function (socket) {
 			for(var i=0; i<users.length; i++) {
 				if(user.id === users[i].id) {
 					users[i].name = n;
-					// var dbUser = new User({ name: n });
-					// dbUser.save(function(err, thor) {
-					// 	if (err) return console.error(err);
-					// 	console.dir(thor);
-					// });
+					var dbUser = new User({ name: n });
+					dbUser.save(function(err, thor) {
+						if (err) return console.error(err);
+						console.dir(thor);
+					});
 					break;
 				}
 			}
