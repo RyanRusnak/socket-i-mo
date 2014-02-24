@@ -7,13 +7,13 @@ var handler = function(req, res) {
 }
 
 // Pre- Heoku mongoose stuff
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-  // yay!
-});
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/test');
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function callback () {
+//   // yay!
+// });
 //Post heroku mongoose stuff
 var http = require ('http');             // For serving a basic web page.
 var mongoose = require ("mongoose"); // The reason for this demo.
