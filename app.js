@@ -40,17 +40,17 @@ var handler = function(req, res) {
 //   }
 // });
 
-var userSchema = mongoose.Schema({
-    name: String
-});
+// var userSchema = mongoose.Schema({
+//     name: String
+// });
 
-var User = mongoose.model('User', userSchema);
+// var User = mongoose.model('User', userSchema);
 
-User.find(function (err, users) {
-  if (err) return console.error(err);
-  console.log('users!!!!!');
-  console.log(users.length);
-});
+// User.find(function (err, users) {
+//   if (err) return console.error(err);
+//   console.log('users!!!!!');
+//   console.log(users.length);
+// });
 
 
 var app = require('http').createServer(handler);
