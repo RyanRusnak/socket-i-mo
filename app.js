@@ -14,30 +14,31 @@ var handler = function(req, res) {
 // db.once('open', function callback () {
 //   // yay!
 // });
-//Post heroku mongoose stuff
-var http = require ('http');             // For serving a basic web page.
-var mongoose = require ("mongoose"); // The reason for this demo.
 
-// Here we find an appropriate database to connect to, defaulting to
-// localhost if we don't find one.
-var uristring =
-process.env.MONGOLAB_URI ||
-process.env.MONGOHQ_URL ||
-'mongodb://localhost/test';
+// //Post heroku mongoose stuff
+// var http = require ('http');             // For serving a basic web page.
+// var mongoose = require ("mongoose"); // The reason for this demo.
 
-// The http server will listen to an appropriate port, or default to
-// port 5000.
-var theport = process.env.PORT || 5000;
+// // Here we find an appropriate database to connect to, defaulting to
+// // localhost if we don't find one.
+// var uristring =
+// process.env.MONGOLAB_URI ||
+// process.env.MONGOHQ_URL ||
+// 'mongodb://localhost/test';
 
-// Makes connection asynchronously.  Mongoose will queue up database
-// operations and release them when the connection is complete.
-mongoose.connect(uristring, function (err, res) {
-  if (err) {
-  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  } else {
-  console.log ('Succeeded connected to: ' + uristring);
-  }
-});
+// // The http server will listen to an appropriate port, or default to
+// // port 5000.
+// var theport = process.env.PORT || 5000;
+
+// // Makes connection asynchronously.  Mongoose will queue up database
+// // operations and release them when the connection is complete.
+// mongoose.connect(uristring, function (err, res) {
+//   if (err) {
+//   console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+//   } else {
+//   console.log ('Succeeded connected to: ' + uristring);
+//   }
+// });
 
 var userSchema = mongoose.Schema({
     name: String
@@ -101,11 +102,11 @@ io.sockets.on('connection', function (socket) {
 			for(var i=0; i<users.length; i++) {
 				if(user.id === users[i].id) {
 					users[i].name = n;
-					var dbUser = new User({ name: n });
-					dbUser.save(function(err, thor) {
-						if (err) return console.error(err);
-						console.dir(thor);
-					});
+					// var dbUser = new User({ name: n });
+					// dbUser.save(function(err, thor) {
+					// 	if (err) return console.error(err);
+					// 	console.dir(thor);
+					// });
 					break;
 				}
 			}
