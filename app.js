@@ -6,41 +6,26 @@ var handler = function(req, res) {
 	});
 }
 
-//mongoose stuff
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/test');
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function callback () {
-//   // yay!
-// });
+// mongoose stuff
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  // yay!
+});
 
-// var userSchema = mongoose.Schema({
-//     name: String
-// });
+var userSchema = mongoose.Schema({
+    name: String
+});
 
-// var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
 
-// var me = new User({ name: 'Ryan' });
-// var kirby = new User({ name: 'Kirby' });
-// console.log(me.name);
-
-// me.save(function(err, thor) {
-//   if (err) return console.error(err);
-//   console.dir(thor);
-// });
-
-// User.find(function (err, users) {
-//   if (err) return console.error(err);
-//   console.log('users!!!!!');
-//   console.log(users.length);
-// });
-
-
-
-
-
-
+User.find(function (err, users) {
+  if (err) return console.error(err);
+  console.log('users!!!!!');
+  console.log(users.length);
+});
 
 
 var app = require('http').createServer(handler);
@@ -92,6 +77,11 @@ io.sockets.on('connection', function (socket) {
 			for(var i=0; i<users.length; i++) {
 				if(user.id === users[i].id) {
 					users[i].name = n;
+					var dbUser = new User({ name: n });
+					dbUser.save(function(err, thor) {
+						if (err) return console.error(err);
+						console.dir(thor);
+					});
 					break;
 				}
 			}
@@ -101,12 +91,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 var users = [];
-function getUsers(){
 
-}
-function getCurrentUser(){
-
-}
 function userNames(users){
 	var str = '';
 	for(var i=0; i<users.length; i++) {
@@ -136,7 +121,5 @@ var removeUser = function(user) {
 	}
 }
 var updateUsers = function() {
-	console.log("users are");
-	console.log(userNames(users));
 	io.sockets.emit("users", userNames(users));
 }
