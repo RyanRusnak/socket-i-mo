@@ -51,7 +51,7 @@
 				var updateNameInput = document.getElementById("updateNameInput");
 				var updateNameButton = document.getElementById("updateNameButton");
 
-				var socket = io.connect('http://localhost:3000');
+				var socket = io.connect(window.location.hostname);
 				socket.on('welcome', function (data) {
 					welcome.innerHTML = "Welcome  <strong>" + data['currentUser'].name + "</strong>";
 					ball.onload = function() {
